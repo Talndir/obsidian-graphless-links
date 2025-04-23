@@ -1,10 +1,10 @@
 {
-	"id": "obsidian-graphless-links",
+	"id": "graphless-links",
 	"name": "Graphless Links",
 	"version": "1.0.0",
-	"minAppVersion": "0.15.0",
+	"minAppVersion": "1.5.0",
 	"description": "Adds a new kind of link that doesn't appear in the graph.",
-	"author": "Talndir",
+	"author": "Omar Tahir",
 	"authorUrl": "",
 	"fundingUrl": "",
 	"isDesktopOnly": false
