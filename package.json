@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-sample-plugin",
+	"name": "obsidian-graphless-links",
 	"version": "1.0.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"description": "An Obsidian plugin that adds a new kind of link that doesn't appear in the graph.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
@@ -20,5 +20,12 @@
 		"obsidian": "latest",
 		"tslib": "2.4.0",
 		"typescript": "4.7.4"
+	},
+	"dependencies": {
+		"@codemirror/language": "^6.10.2",
+		"@codemirror/view": "^6.28.1",
+		"@types/valid-url": "^1.0.3",
+		"@lezer/common": "^1.0.1",
+		"valid-url": "^1.0.9"
 	}
 }
