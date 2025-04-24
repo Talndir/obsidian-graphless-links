@@ -14,6 +14,9 @@ export class GraphlessLinkWidget extends WidgetType {
     }
 
     toDOM(view: EditorView): HTMLElement {
-        return linkSliceToDOM(this.linkSlice);
+        console.log("Rendering slice:");
+        var elem = linkSliceToDOM(this.linkSlice);
+        console.log(elem);
+        return elem;
     }
 }

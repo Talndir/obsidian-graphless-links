@@ -31,6 +31,7 @@ export class GraphlessLinksEditorPlugin implements PluginValue {
     update(update: ViewUpdate) {
         // Update triggers on document change, viewport change, and cursor movement
         if (update.docChanged || update.viewportChanged || update.selectionSet) {
+            console.log("!!!!!!!!!!!! UPDATE !!!!!!!!!!!!");
             this.decorations = this.buildDecorations(update.view, this.app);
         }
     }
@@ -47,6 +48,7 @@ export class GraphlessLinksEditorPlugin implements PluginValue {
         
         this.linkSlices = new Array<LinkSlice>();
         this.findLinks(view, this.linkSlices, app);
+        this.linkSlices.sort((a, b) => a.start - b.start);
         this.processLinks(view, builder);
 
         return builder.finish();
@@ -59,8 +61,13 @@ export class GraphlessLinksEditorPlugin implements PluginValue {
                 from,
                 to,
                 enter: (node: SyntaxNodeRef) => {
-                    const text = view.state.sliceDoc(node.from + 1, node.to - 1);
-                    makeLinkSlices(text, linkSlices, app);
+                    console.log("Current node:")
+                    console.log(node.node);
+                    console.log("Current text:")
+                    console.log(view.state.sliceDoc(node.from, node.to));
+
+                    const text = view.state.sliceDoc(node.from, node.to);
+                    makeLinkSlices(text, node.from, node.to, linkSlices, app);
                 }
             });
         }
@@ -70,11 +77,15 @@ export class GraphlessLinksEditorPlugin implements PluginValue {
     processLinks(view: EditorView, builder: RangeSetBuilder<Decoration>) {
         for (let linkSlice of this.linkSlices) {
             const cursorHead = view.state.selection.main.head;
+            console.log("Processing slice:")
+            console.log(linkSlice);
 
             if (linkSlice.start <= cursorHead && cursorHead <= linkSlice.end) {
                 // Style the link in a special way if the cursor is over it
+                console.log("Decorating slice at cursor");
                 this.styleLink(view, builder, linkSlice);
             } else {
+                console.log("Decorating slice");
                 builder.add(
                     linkSlice.start,
                     linkSlice.end,

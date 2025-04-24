@@ -20,7 +20,7 @@ export interface LinkSlice {
 }
 
 // Add all links from a given piece of text to an array of slices
-export const makeLinkSlices = (text: string, linkSlices: Array<LinkSlice>, app: App) => {
+export const makeLinkSlices = (text: string, from: number, to: number, linkSlices: Array<LinkSlice>, app: App) => {
     let match: RegExpMatchArray | null;
     const regex = /\{\{(.+?)(?:\|(.*?))?\}\}/g;
 
@@ -46,8 +46,8 @@ export const makeLinkSlices = (text: string, linkSlices: Array<LinkSlice>, app: 
         linkSlices.push({
             href,
             alias,
-            start: match.index + 1,
-            end: regex.lastIndex + 1,
+            start: from + match.index + 1,
+            end: from + regex.lastIndex + 1,
             exists
         });
         match = regex.exec(text);
@@ -70,6 +70,6 @@ export const linkSliceToDOM = (slice: LinkSlice) => {
             aElement.addClass("is-unresolved");
         }
     //}
-
+    
     return aElement;
 }
