@@ -23,7 +23,7 @@ export const graphlessLinksPostProcessor
             // Get all the links
             const fragment = document.createDocumentFragment();
             var linkSlices: Array<LinkSlice> = new Array<LinkSlice>();
-            makeLinkSlices(node.textContent!, linkSlices, app);
+            makeLinkSlices(node.textContent!, 0, linkSlices, app);
 
             if (linkSlices.length == 0) {
                 continue;
