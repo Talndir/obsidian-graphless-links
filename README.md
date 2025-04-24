@@ -11,4 +11,4 @@ It looks like a regular link, except that it doesn't create an edge in the graph
 
 Does not support Markdown links, only WikiLinks.
 
-Some portions of code adapted from [Frontmatter Links](https://github.com/Trikzon/obsidian-frontmatter-links).
+Some portions of code adapted from [Frontmatter Links](https://github.com/Trikzon/obsidian-frontmatter-links). Some code contributed by kotaindah55 from the Obsidian discord.

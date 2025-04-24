@@ -20,7 +20,7 @@ export interface LinkSlice {
 }
 
 // Add all links from a given piece of text to an array of slices
-export const makeLinkSlices = (text: string, linkSlices: Array<LinkSlice>, app: App) => {
+export const makeLinkSlices = (text: string, startOffset: number, linkSlices: Array<LinkSlice>, app: App) => {
     let match: RegExpMatchArray | null;
     const regex = /\{\{(.+?)(?:\|(.*?))?\}\}/g;
 
@@ -28,16 +28,17 @@ export const makeLinkSlices = (text: string, linkSlices: Array<LinkSlice>, app: 
     while (match != null && match.index != null) {
         var href: LinkSegment = {
             text: match[1],
-            start: match.index + 3,
-            end: match.index + 3 + match[1].length};
+            start: match.index + 2 + startOffset,
+            end: match.index + 2 + match[1].length + startOffset
+        };
 
         var alias: LinkSegment | undefined = undefined;
 
         if (match[2] != null) {
             alias = {
                 text: match[2],
-                start: href.end + 1,
-                end: regex.lastIndex - 1
+                start: href.end + startOffset,
+                end: regex.lastIndex + startOffset
             }
         }
 
@@ -46,8 +47,8 @@ export const makeLinkSlices = (text: string, linkSlices: Array<LinkSlice>, app: 
         linkSlices.push({
             href,
             alias,
-            start: match.index + 1,
-            end: regex.lastIndex + 1,
+            start: match.index + startOffset,
+            end: regex.lastIndex + startOffset,
             exists
         });
         match = regex.exec(text);

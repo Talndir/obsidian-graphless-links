@@ -47,6 +47,7 @@ export class GraphlessLinksEditorPlugin implements PluginValue {
         
         this.linkSlices = new Array<LinkSlice>();
         this.findLinks(view, this.linkSlices, app);
+        //this.linkSlices.sort((a, b) => a.start - b.start);
         this.processLinks(view, builder);
 
         return builder.finish();
@@ -54,15 +55,10 @@ export class GraphlessLinksEditorPlugin implements PluginValue {
 
     // Find all the links in the view
     findLinks(view: EditorView, linkSlices: Array<LinkSlice>, app: App) {
-        for (let { from, to } of view.visibleRanges) {
-            syntaxTree(view.state).iterate({
-                from,
-                to,
-                enter: (node: SyntaxNodeRef) => {
-                    const text = view.state.sliceDoc(node.from + 1, node.to - 1);
-                    makeLinkSlices(text, linkSlices, app);
-                }
-            });
+        for (let range of view.visibleRanges) {
+            const text = view.state.sliceDoc(range.from, range.to);
+            const startOffset = range.from;
+            makeLinkSlices(text, startOffset, linkSlices, app);
         }
     }
 
