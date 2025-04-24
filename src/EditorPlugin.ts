@@ -47,7 +47,7 @@ export class GraphlessLinksEditorPlugin implements PluginValue {
         
         this.linkSlices = new Array<LinkSlice>();
         this.findLinks(view, this.linkSlices, app);
-        //this.linkSlices.sort((a, b) => a.start - b.start);
+        this.linkSlices.sort((a, b) => a.start - b.start);
         this.processLinks(view, builder);
 
         return builder.finish();
