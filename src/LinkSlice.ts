@@ -65,11 +65,15 @@ export const linkSliceToDOM = (slice: LinkSlice) => {
     //if (isUri(slice.href.text)) {
     //    aElement.addClass("cm-url");
     //} else {
-        aElement.addClass("internal-link");
+        aElement.addClass("cm-hmd-internal-link");
 
-        if (!slice.exists) {
+        // This behaviour is slightly strange, but is how regular links work
+        if (slice.alias != null) {
+            aElement.addClass("cm-link-alias");
+        } else if (!slice.exists) {
             aElement.addClass("is-unresolved");
         }
+        
     //}
 
     return aElement;

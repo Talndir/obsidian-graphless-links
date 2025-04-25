@@ -94,7 +94,7 @@ export class GraphlessLinksEditorPlugin implements PluginValue {
             builder.add(
                 linkSlice.href.start,
                 linkSlice.href.end,
-                Decoration.mark({ class: "cm-link" + resolved})
+                Decoration.mark({ class: "cm-hmd-internal-link" + resolved})
             );
             builder.add(
                 linkSlice.end - 2,
@@ -111,17 +111,17 @@ export class GraphlessLinksEditorPlugin implements PluginValue {
             builder.add(
                 linkSlice.href.start,
                 linkSlice.href.end,
-                Decoration.mark({ class: "cm-link" + resolved })
+                Decoration.mark({ class: "cm-hmd-internal-link cmd-link-has-alias" + resolved })
             );
             builder.add(
                 linkSlice.href.end,
                 linkSlice.href.end + 1,
-                Decoration.mark({ class: "cm-hmd-internal-link" })
+                Decoration.mark({ class: "cm-hmd-internal-link cm-link-alias-pipe" })
             );
             builder.add(
                 linkSlice.alias.start,
                 linkSlice.alias.end,
-                Decoration.mark({ class: "cm-link" + resolved })
+                Decoration.mark({ class: "cm-hmd-internal-link cmd-link-alias"})
             );
             builder.add(
                 linkSlice.end - 2,
